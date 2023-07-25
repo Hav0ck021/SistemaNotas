@@ -11,7 +11,6 @@ struct fichaAluno {
 int main()
 {
     struct fichaAluno aluno[3];
-    char nomes[3][50];
     float vetor[3][5] = {0};
 
     printf("Bem vindo ao Sistema de Notas da Universidade Estadual do Rio de Janeiro (UERJ)!\nDesenvolvido por: Caio Gabriel.\n\n");
