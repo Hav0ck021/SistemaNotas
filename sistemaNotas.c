@@ -21,13 +21,13 @@ int main()
 
     printf("Primeiramente, insira o nome da disciplina em que os alunos estao inscritos: ");
     scanf("%29[^\n]",aluno->materia);
+
     for (int i = 0; i < 3; i++) {
         printf("Insira o nome do aluno: ");
         scanf(" %49[^\n]", aluno[i].nome);
 
         printf("\nInsira as notas do seguinte aluno:\n");
-        for (int j = 0; j < 2; j++)
-        {
+        for (int j = 0; j < 2; j++) {
             do {
                 scanf("%f", &aluno[i].nota);
                 if (aluno[i].nota < 0.0 || aluno[i].nota > 10.0) {
@@ -40,28 +40,24 @@ int main()
 
         vetor[i][2] = (vetor[i][0] + vetor[i][1])/2;
 
-        if(vetor[i][2] >= 7.0)
-        {
+        if(vetor[i][2] >= 7.0) {
             printf("O aluno esta aprovado!\n");
             vetor[i][4] = vetor[i][2];
         } else {
-            if (vetor[i][2] < 4.0)
-            {
+            if (vetor[i][2] < 4.0) {
                 printf("O aluno esta reprovado!\n");
             } else {
                 printf("Insira a nota da prova final!\n");
                 do {
                     scanf("%f", &aluno[i].notaPF);
 
-                    if (aluno[i].notaPF < 0.0 || aluno[i].notaPF > 10.0)
-                    {
+                    if (aluno[i].notaPF < 0.0 || aluno[i].notaPF > 10.0) {
                         printf("Insira uma nota veridica!\n");
                     } else {
                         vetor[i][3] = aluno[i].notaPF;
                         vetor[i][4] = (vetor[i][2] + vetor[i][3])/2;
 
-                        if(vetor[i][4] >= 5.0)
-                        {
+                        if(vetor[i][4] >= 5.0) {
                             printf("O aluno esta aprovado!\n");
                         } else {
                             printf("O aluno esta reprovado!\n");
@@ -72,9 +68,10 @@ int main()
         }
         printf("\n");
     }
+
     printf("Disciplina: %s\n\n", aluno->materia);
-    for (int i = 0; i < 3; i++)
-    {
+
+    for (int i = 0; i < 3; i++) {
         printf("Aluno: %s  ", aluno[i].nome);
         for (int j = 0; j < 5; j++)
         {
