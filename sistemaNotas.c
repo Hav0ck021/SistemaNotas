@@ -71,6 +71,7 @@ int main()
             }
         }
         printf("\n");
+        sleep(3);
         system("cls");
     }
     arquivo = fopen("notas.csv","w");
