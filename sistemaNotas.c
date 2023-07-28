@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include <string.h>
+#define MAX_ALUNOS 3
+#define MAX_NOTAS 5
 
 struct fichaAluno {
     char nome[50];
     char materia[30];
-    float nota;
-    float notaPF;
+    char situacao[15];
+    float nota[MAX_NOTAS];
 };
 
 int main()
 {
-    struct fichaAluno aluno[3];
-    float vetor[3][5] = {0};
+    FILE *arquivo;
+    struct fichaAluno aluno[MAX_ALUNOS];
+    int i, j;
 
     printf("Bem vindo ao Sistema de Notas da Universidade Estadual do Rio de Janeiro (UERJ)!\nDesenvolvido por: Caio Gabriel.\n\n");
     printf(" - Caso o aluno tenha media maior ou igual a 7.0, eh considerado como aprovado\n");
@@ -21,62 +24,84 @@ int main()
     printf("Primeiramente, insira o nome da disciplina em que os alunos estao inscritos: ");
     scanf("%29[^\n]",aluno->materia);
 
-    for (int i = 0; i < 3; i++) {
+    for (i = 0; i < MAX_ALUNOS; i++) {
         printf("Insira o nome do aluno: ");
         scanf(" %49[^\n]", aluno[i].nome);
 
         printf("\nInsira as notas do seguinte aluno:\n");
-        for (int j = 0; j < 2; j++) {
+        for (j = 0; j < 2; j++) {
             do {
-                scanf("%f", &aluno[i].nota);
-                if (aluno[i].nota < 0.0 || aluno[i].nota > 10.0) {
+                scanf("%f", &aluno[i].nota[j]);
+                if (aluno[i].nota[j] < 0.0 || aluno[i].nota[j] > 10.0) {
                     printf("Insira uma nota veridica!\n");
-                } else {
-                    vetor[i][j] = aluno[i].nota;
                 }
-            } while (aluno[i].nota < 0.0 || aluno[i].nota > 10.0);
+            } while (aluno[i].nota[j] < 0.0 || aluno[i].nota[j] > 10.0);
         }
 
-        vetor[i][2] = (vetor[i][0] + vetor[i][1])/2;
+        aluno[i].nota[2] = (aluno[i].nota[0] + aluno[i].nota[1])/2;
 
-        if(vetor[i][2] >= 7.0) {
+        if(aluno[i].nota[2] >= 7.0) {
             printf("O aluno esta aprovado!\n");
-            vetor[i][4] = vetor[i][2];
+            aluno[i].nota[3] = 0;
+            aluno[i].nota[4] = aluno[i].nota[2];
+            strcpy(aluno[i].situacao, "Aprovado");
         } else {
-            if (vetor[i][2] < 4.0) {
+            if (aluno[i].nota[2] < 4.0) {
                 printf("O aluno esta reprovado!\n");
+                strcpy(aluno[i].situacao, "Reprovado");
             } else {
                 printf("Insira a nota da prova final!\n");
                 do {
-                    scanf("%f", &aluno[i].notaPF);
+                    scanf("%f", &aluno[i].nota[3]);
 
-                    if (aluno[i].notaPF < 0.0 || aluno[i].notaPF > 10.0) {
+                    if (aluno[i].nota[3] < 0.0 || aluno[i].nota[3] > 10.0) {
                         printf("Insira uma nota veridica!\n");
                     } else {
-                        vetor[i][3] = aluno[i].notaPF;
-                        vetor[i][4] = (vetor[i][2] + vetor[i][3])/2;
+                        aluno[i].nota[4] = (aluno[i].nota[2] + aluno[i].nota[3])/2;
 
-                        if(vetor[i][4] >= 5.0) {
+                        if(aluno[i].nota[4] >= 5.0) {
                             printf("O aluno esta aprovado!\n");
+                            strcpy(aluno[i].situacao, "Aprovado");
                         } else {
                             printf("O aluno esta reprovado!\n");
+                            strcpy(aluno[i].situacao, "Reprovado");
                         }
                     }
-                } while (aluno[i].notaPF < 0.0 || aluno[i].notaPF > 10.0);
+                } while (aluno[i].nota[3] < 0.0 || aluno[i].nota[3] > 10.0);
             }
         }
         printf("\n");
+        system("cls");
     }
+    arquivo = fopen("notas.csv","w");
 
-    printf("Disciplina: %s\n\n", aluno->materia);
-
-    for (int i = 0; i < 3; i++) {
-        printf("Aluno: %s  ", aluno[i].nome);
-        for (int j = 0; j < 5; j++)
-        {
-            printf("%.2f  ", vetor[i][j]);
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo, ele não pode ser aberto.\n");
+        return 1;
+    } else {
+        fprintf(arquivo, "Disciplina: %s\n", aluno->materia);
+        for (i = 0; i < MAX_ALUNOS; i++) {
+            fprintf(arquivo,"%s", aluno[i].nome);
+            for (j = 0; j < MAX_NOTAS; j++)
+            {
+                fprintf(arquivo,",%.2f", aluno[i].nota[j]);
+            }
+            fprintf(arquivo,",%s", aluno[i].situacao);
+            fprintf(arquivo, "\n");
         }
-        printf("\n");
+        fclose(arquivo);
     }
+
+    printf("Os seguintes dados foram salvos no arquivo 'notas.csv'.\n");
+
+    for (i = 0; i < MAX_ALUNOS; i++) {
+        printf("Nome: %s ", aluno[i].nome);
+        for (j = 0; j < MAX_NOTAS; j++)
+        {
+            printf(" %.2f ", aluno[i].nota[j]);
+        }
+        printf(" %s \n", aluno[i].situacao);
+    }
+
     return 0;
 }
