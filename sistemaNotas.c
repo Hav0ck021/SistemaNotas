@@ -1,33 +1,43 @@
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>
-#include "media/media.h"
-#include "file/notas.h"
+
+#include "file/aluno.h"
+#include "file/file.h"
 #include "os/os.h"
+#include "file/notas.h"
 
 int main() {
+    // Inicializar a adaptação do programa ao idioma Português.
     setlocale(LC_ALL, "Portuguese");
+
+    // Declaração de variáveis e da estrutura de dados "Aluno".
     struct fichaAluno aluno[MAX_ALUNOS];
     int i, j, SO = 0;
     float media;
+
+    /* Inicializa as funções de introdução ao Sistema, escolha
+    do Sistema Operacional utilizado pelo usuário e entrada
+    do nome da Disciplina que receberá as notas. */
     verificarSisOp(&SO);
-    printf("Bem vindo ao Sistema de Notas da Universidade Estadual do Rio de Janeiro (UERJ)!\nDesenvolvido por: Caio Gabriel.\n\n");
-    printf(" - Caso o aluno tenha média maior ou igual a 7.0, é considerado como aprovado\n");
-    printf(" - Se a nota for menor que 4.0, o aluno é diretamente reprovado.\n");
-    printf(" - Se a nota for menor que 7.0 e maior ou igual a 4.0, poderá fazer a prova final.\n\n");
+    apresentacaoSistema();
+    inserirDisciplina(aluno);
 
-    printf("Primeiramente, insira o nome da disciplina em que os alunos estão inscritos: ");
-    scanf("%29[^\n]",aluno->materia);
-
+    /* Loop condicional, para realizar a entrada de notas e
+    verificação de média para cada aluno. Para ajustar a quantidade
+    de alunos, vá para o arquivo aluno.h e altere o valor da definição
+    de MAX_ALUNOS. */
     for (i = 0; i < MAX_ALUNOS; i++) {
-        lerNotas(&aluno[i]);
+        lerNomeNotas(&aluno[i]);
         media = calcularMedia(&aluno[i]);
-        verificarMedia(&aluno[i], &media);
+        verificarMedias(&aluno[i], &media);
         limparTelaSO(&SO);
     }
 
-    salvarNotas(&aluno);
-    printf("Os seguintes dados foram salvos no arquivo 'notas.csv'.\n");
-    saidaTabelaNotas(&aluno);
+    /* Declaração das funções para criar o arquivo que receberá as notas,
+    salvar as notas no arquivo e encerrar o Sistema. */
+    criarArquivo();
+    salvarNotas(aluno);
+    saidaTabelaNotas(aluno);
     return 0;
 }
