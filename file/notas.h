@@ -56,7 +56,7 @@ void salvarNotas(const char *nomeDisciplina, struct fichaAluno *aluno){
         printf("Erro ao abrir o arquivo.\n");
         return;
     } else {
-        fprintf(arquivo, "Disciplina: %s\n", aluno->materia);
+        fprintf(arquivo, "Disciplina: %s\nNomes,Prova 1,Prova 2,Media,Prova Final,Media Final,Situacao\n", aluno->materia);
         for (i = 0; i < MAX_ALUNOS; i++) {
             fprintf(arquivo,"%s", aluno[i].nome);
             for (j = 0; j < MAX_NOTAS; j++) {
