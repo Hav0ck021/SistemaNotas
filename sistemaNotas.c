@@ -30,7 +30,7 @@ int main() {
     for (i = 0; i < MAX_ALUNOS; i++) {
         lerNomeNotas(&aluno[i]);
         media = calcularMedia(&aluno[i]);
-        if(verificarMedias(&aluno[i], &media) == false) {
+        if(!verificarMedias(&aluno[i], &media)) {
             lerNotaFinal(&aluno[i]);
             verificarMediaFinal(&aluno[i]);
         }
