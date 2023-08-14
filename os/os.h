@@ -5,6 +5,8 @@
 #include <windows.h> //Biblioteca para funções do terminal Microsoft Windows
 #include <unistd.h>  //Biblioteca para funções do terminal Linux
 
+/* Função para apresentação do sistema de notas e
+instruções de como utilizar suas funcionalidades. */
 void apresentacaoSistema(){
     printf("Bem vindo ao Sistema de Notas da Universidade Estadual do Rio de Janeiro (UERJ)!\nDesenvolvido por: Caio Gabriel.\n\n");
     printf(" - Caso o aluno tenha média maior ou igual a 7.0, é considerado como aprovado\n");
@@ -13,6 +15,8 @@ void apresentacaoSistema(){
     return;
 }
 
+/* Função para realizar a limpeza de tela, com
+base no sistema operacional indicado pelo usuário. */
 void limparTelaSO(int *num){
     switch(*num){
         case 1:
@@ -30,6 +34,8 @@ void limparTelaSO(int *num){
     }
 }
 
+/* Função para identificar o sistema operacional,
+podendo ser 3 opções: Windows, Linux ou MacOS. */
 void verificarSisOp(int *num){
     int opcao;
     bool opcaoValida = false;

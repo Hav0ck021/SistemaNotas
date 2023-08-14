@@ -43,11 +43,15 @@ void lerNomeNotas(struct fichaAluno *aluno){
     }
 }
 
-void salvarNotas(struct fichaAluno *aluno){
-    FILE *arquivo;
+void salvarNotas(const char *nomeDisciplina, struct fichaAluno *aluno){
+    setlocale(LC_NUMERIC, "C");
+
+    char nomeArquivo[100];
+    snprintf(nomeArquivo, sizeof(nomeArquivo), "notas_%s.csv", nomeDisciplina);
+
+    FILE *arquivo = fopen(nomeArquivo,"r+");
     int i, j;
 
-    arquivo = fopen("notas.csv","r+");
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         return;
@@ -62,7 +66,7 @@ void salvarNotas(struct fichaAluno *aluno){
             fprintf(arquivo, "\n");
         }
         fclose(arquivo);
-        printf("\nOs dados anteriores foram salvos no arquivo 'notas.csv'.\n");
+        printf("\nOs dados anteriores foram salvos no arquivo %s.\n", nomeArquivo);
     }
 }
 
