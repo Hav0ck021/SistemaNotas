@@ -1,4 +1,4 @@
-# SistemaNotas:
+# SistemaNotas
  - Desenvolvido por Caio Gabriel
  - A construção foi feita com a Linguagem C
  - Pode ser utilizados nos seguintes Sistemas Operacionais: Microsoft Windows, Linux e suas distribuições e MacOS
