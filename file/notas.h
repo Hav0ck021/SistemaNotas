@@ -2,9 +2,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define MAX_ALUNOS 3
-#define MAX_NOTAS 5
-
 bool validarNota(float *nota) {
     return *nota >= 0.0 && *nota <= 10.0;
 }
