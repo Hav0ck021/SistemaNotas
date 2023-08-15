@@ -14,7 +14,7 @@ Modelo inicial do Sistema de Notas baseado no critério de Aprovação da UERJ (
 O programa salva os dados inseridos numa planilha .csv para o usuário final no seguinte formato: "notas_NomeDisciplina.csv".
 
 # Utilização do Sistema
-```
 Para a utilização em qualquer Sistema Operacional, em seu terminal basta digitar o seguinte comando:
+```
 gcc -o sistemaNotas sistemaNotas.c
 ```
