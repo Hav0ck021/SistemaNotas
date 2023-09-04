@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define MAX_ALUNOS 3
+#define MAX_ALUNOS 3 // A quantidade de alunos pode ser editada aqui!
 #define MAX_NOTAS 5
 
 struct fichaAluno {
