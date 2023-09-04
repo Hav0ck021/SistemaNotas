@@ -12,3 +12,9 @@ Modelo inicial do Sistema de Notas baseado no critério de Aprovação da UERJ (
  - Se a nota for menor que 4.0, o aluno é diretamente reprovado;
  - Se a nota for menor que 7.0 e maior ou igual a 4.0, poderá fazer a prova final.
 O programa salva os dados inseridos numa planilha .csv para o usuário final no seguinte formato: "notas_NomeDisciplina.csv".
+
+# Utilização do Sistema
+Para a construção do executável em qualquer Sistema Operacional, em seu terminal basta digitar o seguinte comando:
+```
+gcc -o sistemaNotas sistemaNotas.c
+```
